@@ -23,6 +23,15 @@ in
 
       imports = [std.devshellProfiles.default];
 
+      # Tool Homepage: https://nix-community.github.io/nixago/
+      nixago = [
+        cell.configs.editorconfig
+        cell.configs.treefmt
+        cell.configs.conform
+        cell.configs.lefthook
+        cell.configs.githubsettings
+      ];
+
       commands = [
         {package = inputs.nixpkgs.nodejs;}
         {package = inputs.nixpkgs.yarn;}
