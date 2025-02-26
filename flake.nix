@@ -8,6 +8,7 @@
       url = "github:divnix/std";
       inputs = {
         devshell.url = "github:numtide/devshell";
+        nixago.url = "github:nix-community/nixago";
       };
     };
   };
@@ -26,6 +27,7 @@
         android_sdk.accept_license = true;
       };
       cellBlocks = with std.blockTypes; [
+        (nixago "configs")
         (devshells "shells")
       ];
     } {
