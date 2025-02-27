@@ -1,10 +1,17 @@
-import { ThemedText } from "@/src/components/ThemedText";
-import { View } from "react-native";
+import { StyleSheet } from "react-native";
+import Todos from "../features/todos/Todos";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   return (
-    <View>
-      <ThemedText>Hello</ThemedText>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Todos />
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
