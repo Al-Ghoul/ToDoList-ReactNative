@@ -16,7 +16,7 @@ export const todosSlice = createSlice({
     addTodo: (state, action: PayloadAction<string>) => {
       state.value.push({
         //  NOTE: in a real app this should be a server generated id or at least not a numeric value
-        id: state.value.length + 1,
+        id: Date.now(),
         title: action.payload,
         completed: false,
       });
