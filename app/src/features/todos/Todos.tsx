@@ -3,6 +3,7 @@ import { View, StyleSheet, FlatList, Pressable, Text } from "react-native";
 import { completeTodo, removeTodo, selectTodos } from "./todosSlice";
 import AddTodosInput from "./AddTodosInput";
 import { useEffect, useMemo, useState } from "react";
+import Animated, { LinearTransition } from "react-native-reanimated";
 import TodoSkeleton from "./TodoSkeleton";
 
 export default function Todos() {
@@ -48,20 +49,22 @@ function TodoItem({ todo }: { todo: Todo }) {
   const dispatch = useAppDispatch();
 
   return (
-    <Pressable
-      style={styles.todoItemContainer}
-      onPress={() => dispatch(completeTodo(todo.id))}
-    >
-      <Text style={todo.completed ? styles.completed : styles.todoTitle}>
-        {todo.title}
-      </Text>
+    <Animated.View layout={LinearTransition}>
+      <Pressable
+        style={styles.todoItemContainer}
+        onPress={() => dispatch(completeTodo(todo.id))}
+      >
+        <Text style={todo.completed ? styles.completed : styles.todoTitle}>
+          {todo.title}
+        </Text>
 
-      <Text>Completed: {todo.completed ? "✅" : "❌"}</Text>
+        <Text>Completed: {todo.completed ? "✅" : "❌"}</Text>
 
-      <Pressable onPress={() => dispatch(removeTodo(todo.id))}>
-        <Text style={styles.todoDeleteButtonText}>Delete</Text>
+        <Pressable onPress={() => dispatch(removeTodo(todo.id))}>
+          <Text style={styles.todoDeleteButtonText}>Delete</Text>
+        </Pressable>
       </Pressable>
-    </Pressable>
+    </Animated.View>
   );
 }
 
