@@ -4,11 +4,14 @@ import {
   combineReducers,
   createStore,
 } from "@reduxjs/toolkit";
+import todosReducer from "./features/todos/todosSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { persistReducer, persistStore } from "redux-persist";
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  todos: todosReducer,
+});
 
 const persistConfig = {
   key: "root",
