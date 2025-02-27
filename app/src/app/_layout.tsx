@@ -8,8 +8,11 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
+import { Provider as ReduxProvider } from "react-redux";
 
 import { useColorScheme } from "@/src/hooks/useColorScheme";
+import { persistor, store } from "../store";
+import { PersistGate } from "redux-persist/integration/react";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -32,11 +35,15 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="index" options={{ title: "ToDo List" }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
+      <ReduxProvider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <Stack>
+            <Stack.Screen name="index" options={{ title: "ToDo List" }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+          <StatusBar style="auto" />
+        </PersistGate>
+      </ReduxProvider>
     </ThemeProvider>
   );
 }
